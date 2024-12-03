@@ -1,29 +1,9 @@
-local UserInputService = game:GetService("UserInputService")
+-- Acessa o personagem do jogador
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
+
+-- Aguarda o personagem ter um "Humanoid" (necessário para modificar a velocidade)
 local humanoid = character:WaitForChild("Humanoid")
 
-local normalSpeed = 16
-local boostedSpeed = 30
-
--- Função para definir a velocidade
-local function setSpeed(speed)
-    humanoid.WalkSpeed = speed
-end
-
--- Conectar o evento de entrada do teclado
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if not gameProcessed and input.UserInputType == Enum.UserInputType.Keyboard then
-        if input.KeyCode == Enum.KeyCode.L then
-            setSpeed(boostedSpeed)
-        elseif input.KeyCode == Enum.KeyCode.K then
-            setSpeed(normalSpeed)
-        end
-    end
-end)
-
--- Atualiza o personagem se ele for resetado
-player.CharacterAdded:Connect(function(newCharacter)
-    character = newCharacter
-    humanoid = character:WaitForChild("Humanoid")
-end)
+-- Define a nova velocidade
+humanoid.WalkSpeed = 35
